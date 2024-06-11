@@ -14,8 +14,16 @@ SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('Expenses tracker')
 
-incomes = SHEET.worksheet('Incomes')
+# incomes = SHEET.worksheet('Incomes')
 
-data = incomes.get_all_values()
+# data = incomes.get_all_values()
 
-pprint(data)
+# pprint(data)
+
+def main():
+    """
+    Run all program functions
+    """
+    print("****Welcome to Expenses Tracker! We're here to help you track your expenses and incomes.****\n****Let's begin your financial journey.****")
+
+main()
