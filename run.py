@@ -1,5 +1,6 @@
 import gspread
 from google.oauth2.service_account import Credentials
+from datetime import datetime
 from pprint import pprint
 
 
@@ -68,7 +69,13 @@ def modify_or_display_sheet(sheet):
           "Type 'info' to see the data or 'add' to enter new data.\n"
           "If you want to exit the program type 'exit'.\n"
           )
-    
+    # Data list to store in sheets
+    data_list = []
+
+    # Get the current system date
+    current_date = datetime.now().strftime("%Y-%m-%d")
+    # append current date to data list as the first element of the list
+    data_list.append(current_date)
     while True:
         user_choice = input(">>  ").lower()
         if user_choice in ["info", "add", "exit"]:
@@ -82,15 +89,29 @@ def modify_or_display_sheet(sheet):
                     print("Current data shown. Type 'add' to add more data or 'exit' to leave the program.")
                 print("Current data shown. Type 'exit' to leave the program.")
             elif user_choice == "add":
-                # if sheet.title != "Summary":
-                #     print("Adding data...")
-                #     print("")
                 if sheet.title == "Summary":
                     print("Heads up: This sheet does not support manual data addition.\n"
                           "This sheet is read-only. Type 'info' to see its contents."
                           )
                 elif sheet.title == "Incomes":
-                    pass             
+                    print("You need to specify: Source, Amount, Payment Method, and Description.")
+                    print("Example: Source (Job salary), Amount (4000)," 
+                          "Payment method (card, cash), Description (Salary from online job)."
+                          )  
+                    print("")
+                    source = input("Enter the income source\n>>  ").capitalize() 
+                    data_list.append(source)
+                    amount = int(input("Enter the income amount\n>>  ")) 
+                    data_list.append(amount)
+                    payment_method = input("Enter the income Payment method\n>>  ").capitalize()
+                    data_list.append(payment_method)
+                    description = input("write a description for this income\n>>  ").capitalize()
+                    data_list.append(description) 
+                    print("Adding data to Incomes sheet...")
+                    sheet.append_row(data_list)
+                    print("Your inputs has been successfully saved in the worksheet.")
+                    
+                       
             else:
                 print("Exiting the program...\nProgram cloesed.")
                 break
