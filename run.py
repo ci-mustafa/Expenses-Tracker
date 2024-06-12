@@ -76,8 +76,6 @@ def modify_or_display_sheet(sheet):
 
     # Get the current system date
     current_date = datetime.now().strftime("%Y-%m-%d")
-    # append current date to data list as the first element of the list
-    data_list.append(current_date)
     while True:
         user_choice = input(">>  ").lower()
         if user_choice in ["info", "add", "exit"]:
@@ -89,7 +87,8 @@ def modify_or_display_sheet(sheet):
                 print("")
                 if sheet.title != "Summary":
                     print("Current data shown. Type 'add' to add more data or 'exit' to leave the program.")
-                print("Current data shown. Type 'exit' to leave the program.")
+                else:
+                    print("Current data shown. Type 'exit' to leave the program.")
             elif user_choice == "add":
                 if sheet.title == "Summary":
                     print("Heads up: This sheet does not support manual data addition.\n"
@@ -101,6 +100,8 @@ def modify_or_display_sheet(sheet):
                           "Payment method (Card, Cash), Description (Salary from online job)."
                           )  
                     print("")
+                    # append current date to data list as the first element of the list
+                    data_list.append(current_date)
                     source = input("Enter income source\n>>  ").capitalize() 
                     data_list.append(source)
                     amount = int(input("Enter income amount\n>>  ")) 
@@ -113,12 +114,18 @@ def modify_or_display_sheet(sheet):
                     sheet.append_row(data_list)
                     data_list.clear()
                     print("Your inputs has been successfully saved in the worksheet.")
+                    print("")
+                    print("You can add more incomes to this worksheet by typing 'add',"
+                          " view the content by typing 'info', or type 'exit' to exit the program."
+                          )
                 elif sheet.title == "Expenses":
                     print("You need to specify: Type, Amount, Payment Method, and Description.")
                     print("Example: Type (Electric bill), Amount (450)," 
                           "Payment method (Card, Cash), Description (This payment is for the electricity expenses.)."
                           )  
                     print("")
+                    # append current date to data list as the first element of the list
+                    data_list.append(current_date)
                     expense_type = input("Enter expense type\n>>  ").capitalize() 
                     data_list.append(expense_type)
                     amount = int(input("Enter expense amount\n>>  ")) 
@@ -130,7 +137,11 @@ def modify_or_display_sheet(sheet):
                     print("Adding data to expenses sheet...")
                     sheet.append_row(data_list)
                     data_list.clear()
-                    print("Your inputs has been successfully saved in the worksheet.")              
+                    print("Your inputs has been successfully saved in the worksheet.")
+                    print("")
+                    print("You can add more expenses to this worksheet by typing 'add',"
+                          " view the content by typing 'info', or type 'exit' to exit the program."
+                          )              
             else:
                 print("Exiting the program...\nProgram cloesed.")
                 break
