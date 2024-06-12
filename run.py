@@ -67,10 +67,16 @@ def modify_or_display_sheet(sheet):
 
     The function will prompt you to choose between viewing the current data or adding new data.
     """
-    print("Select an action: view the sheet's data or add new data?\n"
-          "Type 'info' to see the data or 'add' to enter new data.\n"
-          "If you want to exit the program type 'exit'.\n"
-          )
+    if sheet.title != "Summary":
+        print("Select an action: view the sheet's data or add new data?\n"
+            "Type 'info' to see the data or 'add' to enter new data.\n"
+            "If you want to exit the program type 'exit'.\n"
+            )
+    else:
+        print("Select an action: Type 'info' to view the sheet's data or\n"
+            "Type 'exit' to exit the program.\n"
+            )
+
     # Data list to store in sheets
     data_list = []
 
