@@ -56,6 +56,8 @@ def select_sheet():
         else:
             print("Wrong Entry!!!")
 
+
+
 def modify_or_display_sheet(sheet):
     """
     This function allows you to either show the sheet data or add new data to the sheet.
@@ -96,22 +98,39 @@ def modify_or_display_sheet(sheet):
                 elif sheet.title == "Incomes":
                     print("You need to specify: Source, Amount, Payment Method, and Description.")
                     print("Example: Source (Job salary), Amount (4000)," 
-                          "Payment method (card, cash), Description (Salary from online job)."
+                          "Payment method (Card, Cash), Description (Salary from online job)."
                           )  
                     print("")
-                    source = input("Enter the income source\n>>  ").capitalize() 
+                    source = input("Enter income source\n>>  ").capitalize() 
                     data_list.append(source)
-                    amount = int(input("Enter the income amount\n>>  ")) 
+                    amount = int(input("Enter income amount\n>>  ")) 
                     data_list.append(amount)
-                    payment_method = input("Enter the income Payment method\n>>  ").capitalize()
+                    payment_method = input("Enter income Payment method\n>>  ").capitalize()
                     data_list.append(payment_method)
                     description = input("write a description for this income\n>>  ").capitalize()
                     data_list.append(description) 
-                    print("Adding data to Incomes sheet...")
+                    print("Adding data to incomes sheet...")
                     sheet.append_row(data_list)
+                    data_list.clear()
                     print("Your inputs has been successfully saved in the worksheet.")
-                    
-                       
+                elif sheet.title == "Expenses":
+                    print("You need to specify: Type, Amount, Payment Method, and Description.")
+                    print("Example: Type (Electric bill), Amount (450)," 
+                          "Payment method (Card, Cash), Description (This payment is for the electricity expenses.)."
+                          )  
+                    print("")
+                    expense_type = input("Enter expense type\n>>  ").capitalize() 
+                    data_list.append(expense_type)
+                    amount = int(input("Enter expense amount\n>>  ")) 
+                    data_list.append(amount)
+                    payment_method = input("Enter expense Payment method\n>>  ").capitalize()
+                    data_list.append(payment_method)
+                    description = input("write a description for this expense\n>>  ").capitalize()
+                    data_list.append(description) 
+                    print("Adding data to expenses sheet...")
+                    sheet.append_row(data_list)
+                    data_list.clear()
+                    print("Your inputs has been successfully saved in the worksheet.")              
             else:
                 print("Exiting the program...\nProgram cloesed.")
                 break
