@@ -85,10 +85,9 @@ def modify_or_display_sheet(sheet: object) -> list:
     # Data list to store in sheets
     data_list = []
 
-    
-
     # List that store sum of total expenses and sum of total incomes
     total_incomes_total_expenses = []
+
     while True:
         user_choice = input(">>  ").lower()
         if user_choice in ["info", "add", "exit"]:
@@ -128,9 +127,9 @@ def modify_or_display_sheet(sheet: object) -> list:
                     data_list.clear()
                     print("Your inputs has been successfully saved in the worksheet.")
                     print("")
-                    print("You can add more incomes to this worksheet by typing 'add',"
-                          " view the content by typing 'info', or type 'exit' to exit the program."
-                          )
+
+                    print("Calculating remaining balance...")
+                    print("")
                     # Accessing amount column of the sheet to return sum of all amounts
                     incomes_amount_column = sheet.col_values(3)
                     incomes_amount_values = incomes_amount_column[1:]
@@ -145,7 +144,7 @@ def modify_or_display_sheet(sheet: object) -> list:
                     sum_of_ex_amount_values = sum(int(value) for value in ex_amount_values)
                     # Append existing total expenses to the list
                     total_incomes_total_expenses.append(sum_of_ex_amount_values)
-                    print(total_incomes_total_expenses)
+                    print("Summary sheet updated successfully.")
                     return total_incomes_total_expenses
                 elif sheet.title == "Expenses":
                     print("You need to specify: Type, Amount, Payment Method, and Description.")
@@ -168,10 +167,9 @@ def modify_or_display_sheet(sheet: object) -> list:
                     data_list.clear()
                     print("Your inputs has been successfully saved in the worksheet.")
                     print("")
-                    print("You can add more expenses to this worksheet by typing 'add',"
-                          " view the content by typing 'info', or type 'exit' to exit the program."
-                          )
                     
+                    print("Calculating remaining balance...")
+                    print("")
                     # Access sum of incomes amount
                     incomes_sheet = SHEET.worksheet("Incomes")
                     inc_amount_column = incomes_sheet.col_values(3)
@@ -186,7 +184,7 @@ def modify_or_display_sheet(sheet: object) -> list:
                     sum_of_expenses_amount_values = sum(int(value) for value in expenses_amount_values)
                     # Append total expenses to the list
                     total_incomes_total_expenses.append(sum_of_expenses_amount_values)
-                    print(total_incomes_total_expenses)
+                    print("Summary sheet updated successfully.")
                     return total_incomes_total_expenses         
             else:
                 print("Exiting the program...\nProgram cloesed.")
