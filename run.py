@@ -14,9 +14,11 @@ CREDS = Credentials.from_service_account_file('creds.json')
 SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('Expenses tracker')
+# Get current date
+CURRENT_DATE = datetime.now().strftime("%Y-%m-%d")
 
 
-def select_sheet():
+def select_sheet() -> object:
     """
     This function helps you choose which sheet to access from your Google Spreadsheet.
 
@@ -58,7 +60,7 @@ def select_sheet():
 
 
 
-def modify_or_display_sheet(sheet):
+def modify_or_display_sheet(sheet: object) -> list:
     """
     This function allows you to either show the sheet data or add new data to the sheet.
 
@@ -83,8 +85,7 @@ def modify_or_display_sheet(sheet):
     # Data list to store in sheets
     data_list = []
 
-    # Get the current system date
-    current_date = datetime.now().strftime("%Y-%m-%d")
+    
 
     # List that store sum of total expenses and sum of total incomes
     total_incomes_total_expenses = []
@@ -113,7 +114,7 @@ def modify_or_display_sheet(sheet):
                           )  
                     print("")
                     # append current date to data list as the first element of the list
-                    data_list.append(current_date)
+                    data_list.append(CURRENT_DATE)
                     source = input("Enter income source\n>>  ").capitalize() 
                     data_list.append(source)
                     amount = int(input("Enter income amount\n>>  ")) 
@@ -144,6 +145,8 @@ def modify_or_display_sheet(sheet):
                     sum_of_ex_amount_values = sum(int(value) for value in ex_amount_values)
                     # Append existing total expenses to the list
                     total_incomes_total_expenses.append(sum_of_ex_amount_values)
+                    print(total_incomes_total_expenses)
+                    return total_incomes_total_expenses
                 elif sheet.title == "Expenses":
                     print("You need to specify: Type, Amount, Payment Method, and Description.")
                     print("Example: Type (Electric bill), Amount (450)," 
@@ -151,7 +154,7 @@ def modify_or_display_sheet(sheet):
                           )  
                     print("")
                     # append current date to data list as the first element of the list
-                    data_list.append(current_date)
+                    data_list.append(CURRENT_DATE)
                     expense_type = input("Enter expense type\n>>  ").capitalize() 
                     data_list.append(expense_type)
                     amount = int(input("Enter expense amount\n>>  ")) 
@@ -182,22 +185,36 @@ def modify_or_display_sheet(sheet):
                     expenses_amount_values = expenses_amount_column[1:]
                     sum_of_expenses_amount_values = sum(int(value) for value in expenses_amount_values)
                     # Append total expenses to the list
-                    total_incomes_total_expenses.append(sum_of_expenses_amount_values)         
+                    total_incomes_total_expenses.append(sum_of_expenses_amount_values)
+                    print(total_incomes_total_expenses)
+                    return total_incomes_total_expenses         
             else:
                 print("Exiting the program...\nProgram cloesed.")
                 break
         else:
-            print("Wrong Entry!!!\nPlease type 'info', 'add' or 'exit'.")
-    return total_incomes_total_expenses
+            print("Wrong Entry!!!\nPlease type 'info', 'add' or 'exit'.")   
         
+def update_remainig_balance(totals: list):
+    """
+    Update the remaining balance in the Summary sheet based on the total incomes and total expenses.
 
+    Parameters:
+        totals (list): A list containing two elements:
+                       - Total incomes (int)
+                       - Total expenses (int)
+    """
+    if totals:
+        total_incomes = totals[0]
+        total_expenses = totals[1]
+        summary_sheet = SHEET.worksheet("Summary")
+        summary_sheet.append_row([CURRENT_DATE, total_incomes, total_expenses, total_incomes - total_expenses])
+
+    
 def main():
     """
     Run all program functions
     """
     print("****Welcome to Expenses Tracker! We're here to help you track your expenses and incomes.****\n****Let's begin your financial journey.****")
-
-    modify_or_display_sheet(select_sheet())
-    
+    update_remainig_balance(modify_or_display_sheet(select_sheet()))
 
 main()
