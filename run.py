@@ -124,6 +124,12 @@ def modify_or_display_sheet(sheet):
                     print("You can add more incomes to this worksheet by typing 'add',"
                           " view the content by typing 'info', or type 'exit' to exit the program."
                           )
+                    # Accessing amount column of the sheet to return sum of all amounts
+                    incomes_amount_column = sheet.col_values(3)
+                    incomes_amount_values = incomes_amount_column[1:]
+                    sum_of_incomes_amount_values = sum(int(value) for value in incomes_amount_values)
+                    # print(sum_of_incomes_amount_values)
+                    return sum_of_incomes_amount_values
                 elif sheet.title == "Expenses":
                     print("You need to specify: Type, Amount, Payment Method, and Description.")
                     print("Example: Type (Electric bill), Amount (450)," 
@@ -147,7 +153,13 @@ def modify_or_display_sheet(sheet):
                     print("")
                     print("You can add more expenses to this worksheet by typing 'add',"
                           " view the content by typing 'info', or type 'exit' to exit the program."
-                          )              
+                          )
+                    # Accessing amount column of the sheet to return sum of all amounts
+                    expenses_amount_column = sheet.col_values(3)
+                    expenses_amount_values = expenses_amount_column[1:]
+                    sum_of_expenses_amount_values = sum(int(value) for value in expenses_amount_values)
+                    # print(sum_of_expenses_amount_values)
+                    return sum_of_expenses_amount_values          
             else:
                 print("Exiting the program...\nProgram cloesed.")
                 break
