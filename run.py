@@ -82,6 +82,9 @@ def modify_or_display_sheet(sheet):
 
     # Get the current system date
     current_date = datetime.now().strftime("%Y-%m-%d")
+
+    # List that store sum of total expenses and sum of total incomes
+    total_incomes_total_expenses = []
     while True:
         user_choice = input(">>  ").lower()
         if user_choice in ["info", "add", "exit"]:
@@ -128,8 +131,16 @@ def modify_or_display_sheet(sheet):
                     incomes_amount_column = sheet.col_values(3)
                     incomes_amount_values = incomes_amount_column[1:]
                     sum_of_incomes_amount_values = sum(int(value) for value in incomes_amount_values)
-                    # print(sum_of_incomes_amount_values)
-                    return sum_of_incomes_amount_values
+                    # Append total incomes to the list
+                    total_incomes_total_expenses.append(sum_of_incomes_amount_values)
+
+                    # Access sum of expenses amount
+                    expenses_sheet = SHEET.worksheet("Expenses")
+                    ex_amount_column = expenses_sheet.col_values(3)
+                    ex_amount_values = ex_amount_column[1:]
+                    sum_of_ex_amount_values = sum(int(value) for value in ex_amount_values)
+                    # Append existing total expenses to the list
+                    total_incomes_total_expenses.append(sum_of_ex_amount_values)
                 elif sheet.title == "Expenses":
                     print("You need to specify: Type, Amount, Payment Method, and Description.")
                     print("Example: Type (Electric bill), Amount (450)," 
@@ -154,17 +165,27 @@ def modify_or_display_sheet(sheet):
                     print("You can add more expenses to this worksheet by typing 'add',"
                           " view the content by typing 'info', or type 'exit' to exit the program."
                           )
+                    
+                    # Access sum of incomes amount
+                    incomes_sheet = SHEET.worksheet("Incomes")
+                    inc_amount_column = incomes_sheet.col_values(3)
+                    inc_amount_values = inc_amount_column[1:]
+                    sum_of_inc_amount_values = sum(int(value) for value in inc_amount_values)
+                    # Append existing total incomes to the list
+                    total_incomes_total_expenses.append(sum_of_inc_amount_values)
+
                     # Accessing amount column of the sheet to return sum of all amounts
                     expenses_amount_column = sheet.col_values(3)
                     expenses_amount_values = expenses_amount_column[1:]
                     sum_of_expenses_amount_values = sum(int(value) for value in expenses_amount_values)
-                    # print(sum_of_expenses_amount_values)
-                    return sum_of_expenses_amount_values          
+                    # Append total expenses to the list
+                    total_incomes_total_expenses.append(sum_of_expenses_amount_values)         
             else:
                 print("Exiting the program...\nProgram cloesed.")
                 break
         else:
             print("Wrong Entry!!!\nPlease type 'info', 'add' or 'exit'.")
+    return total_incomes_total_expenses
         
 
 def main():
@@ -174,5 +195,6 @@ def main():
     print("****Welcome to Expenses Tracker! We're here to help you track your expenses and incomes.****\n****Let's begin your financial journey.****")
 
     modify_or_display_sheet(select_sheet())
+    
 
 main()
