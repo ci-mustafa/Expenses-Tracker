@@ -65,7 +65,10 @@ def modify_or_display_sheet(sheet):
     Parameters:
         sheet: The worksheet object you want to manage.
 
-    The function will prompt you to choose between viewing the current data or adding new data.
+    Returns:
+        list: A list containing two elements:
+              - Total incomes (int)
+              - Total expenses (int)
     """
     if sheet.title != "Summary":
         print("Select an action: view the sheet's data or add new data?\n"
