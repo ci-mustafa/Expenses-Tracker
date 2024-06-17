@@ -34,8 +34,13 @@ def select_sheet() -> object:
         The worksheet object you selected from the Google Spreadsheet.
     """
     while True:
-        choice = input("Please select the sheet you want to access by entering the corresponding number: 1 for Incomes, 2 for Expenses, or 3 for Summary: \n")
-        if choice in ["1", "2", "3"]:
+        choice = input("Please select the sheet you want to access by entering the corresponding number:\n"
+            "1 - Incomes\n"
+            "2 - Expenses\n"
+            "3 - Summary\n"
+            "0 - Exit the program\n"
+            ">> ")
+        if choice in ["0", "1", "2", "3"]:
             if choice == "1":
                 print("Selecting Incomes sheet...")
                 incomes = SHEET.worksheet("Incomes")
@@ -48,13 +53,15 @@ def select_sheet() -> object:
                 print("Expenses sheet selected.")
                 print("")
                 return expenses
-            else:
+            elif choice == "3":
                 print("Selecting Summary sheet...")
                 summaries = SHEET.worksheet("Summary")
                 print("Summary sheet selected.")
                 print("")
                 return summaries
-            break
+            else:
+                print("Exiting the program...")
+                return None
         else:
             print("Wrong Entry!!!")
 
@@ -75,11 +82,11 @@ def modify_or_display_sheet(sheet: object) -> list:
     if sheet.title != "Summary":
         print("Select an action: view the sheet's data or add new data?\n"
             "Type 'info' to see the data or 'add' to enter new data.\n"
-            "If you want to exit the program type 'exit'.\n"
+            "If you want to close the current sheet type 'exit'.\n"
             )
     else:
         print("Select an action: Type 'info' to view the sheet's data or\n"
-            "Type 'exit' to exit the program.\n"
+            "Type 'exit' to close the sheet.\n"
             )
 
     # Data list to store in sheets
@@ -98,9 +105,9 @@ def modify_or_display_sheet(sheet: object) -> list:
                 pprint(data)
                 print("")
                 if sheet.title != "Summary":
-                    print("Current data shown. Type 'add' to add more data or 'exit' to leave the program.")
+                    print("Current data shown. Type 'add' to add more data or 'exit' to close the sheet.")
                 else:
-                    print("Current data shown. Type 'exit' to leave the program.")
+                    print("Current data shown. Type 'exit' to close the sheet.")
             elif user_choice == "add":
                 if sheet.title == "Summary":
                     print("Heads up: This sheet does not support manual data addition.\n"
@@ -187,12 +194,12 @@ def modify_or_display_sheet(sheet: object) -> list:
                     print("Summary sheet updated successfully.")
                     return total_incomes_total_expenses         
             else:
-                print("Exiting the program...\nProgram cloesed.")
+                print("Closing the sheet...\nSheet cloesed.")
                 break
         else:
             print("Wrong Entry!!!\nPlease type 'info', 'add' or 'exit'.")   
         
-def update_remainig_balance(totals: list):
+def update_remaining_balance(totals: list):
     """
     Update the remaining balance in the Summary sheet based on the total incomes and total expenses.
 
@@ -213,6 +220,15 @@ def main():
     Run all program functions
     """
     print("****Welcome to Expenses Tracker! We're here to help you track your expenses and incomes.****\n****Let's begin your financial journey.****")
-    update_remainig_balance(modify_or_display_sheet(select_sheet()))
+    while True:
+        selected_sheet = select_sheet()
+        if selected_sheet:
+            totals = modify_or_display_sheet(selected_sheet)
+            if totals:
+                update_remaining_balance(totals)
+        else:
+            print("")
+            print("Thank you for using the Expenses Tracker. Goodbye!")
+            break
 
 main()
