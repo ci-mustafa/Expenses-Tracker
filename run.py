@@ -205,7 +205,10 @@ def modify_or_display_sheet(sheet: object) -> list:
                 print("Closing the sheet...\nSheet cloesed.")
                 break
         else:
-            print("Wrong Entry!!!\nPlease type 'info', 'add' or 'exit'.")   
+            if sheet.title != "Summary":
+                print("Wrong Entry!!!\nPlease type 'info', 'add' or 'exit'.")
+            else:
+                print("wrong Entry!!!\nPlease type 'info' or 'exit'.") 
         
 def update_remaining_balance(totals: list):
     """
