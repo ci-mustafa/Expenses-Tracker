@@ -162,45 +162,51 @@ def modify_or_display_sheet(sheet: object) -> list:
                     print("Summary sheet updated successfully.")
                     return total_incomes_total_expenses
                 elif sheet.title == "Expenses":
-                    print("You need to specify: Type, Amount, Payment Method, and Description.")
-                    print("Example: Type (Electric bill), Amount (450)," 
-                          "Payment method (Card, Cash), Description (This payment is for the electricity expenses.)."
-                          )  
-                    print("")
-                    # append current date to data list as the first element of the list
-                    data_list.append(CURRENT_DATE)
-                    expense_type = input("Enter expense type\n>>  ").capitalize() 
-                    data_list.append(expense_type)
-                    amount = int(input("Enter expense amount\n>>  ")) 
-                    data_list.append(amount)
-                    payment_method = input("Enter expense Payment method\n>>  ").capitalize()
-                    data_list.append(payment_method)
-                    description = input("write a description for this expense\n>>  ").capitalize()
-                    data_list.append(description) 
-                    print("Adding data to expenses sheet...")
-                    sheet.append_row(data_list)
-                    data_list.clear()
-                    print("Your inputs has been successfully saved in the worksheet.")
-                    print("")
-                    
-                    print("Calculating remaining balance...")
-                    print("")
-                    # Access sum of incomes amount
+                    # Access incomes sheet 
                     incomes_sheet = SHEET.worksheet("Incomes")
-                    inc_amount_column = incomes_sheet.col_values(3)
-                    inc_amount_values = inc_amount_column[1:]
-                    sum_of_inc_amount_values = sum(int(value) for value in inc_amount_values)
-                    # Append existing total incomes to the list
-                    total_incomes_total_expenses.append(sum_of_inc_amount_values)
+                    # Validate if incomes sheet is empty
+                    # Do not allow expenses sheet to have data entry ability
+                    if not incomes_sheet.get_all_values()[1:]:
+                        print("Sorry, you do not have any incomes to add an expense!\nType 'exit' to exit the current sheet.")
+                    else:
+                        print("You need to specify: Type, Amount, Payment Method, and Description.")
+                        print("Example: Type (Electric bill), Amount (450)," 
+                            "Payment method (Card, Cash), Description (This payment is for the electricity expenses.)."
+                            )  
+                        print("")
+                        # append current date to data list as the first element of the list
+                        data_list.append(CURRENT_DATE)
+                        expense_type = input("Enter expense type\n>>  ").capitalize() 
+                        data_list.append(expense_type)
+                        amount = int(input("Enter expense amount\n>>  ")) 
+                        data_list.append(amount)
+                        payment_method = input("Enter expense Payment method\n>>  ").capitalize()
+                        data_list.append(payment_method)
+                        description = input("write a description for this expense\n>>  ").capitalize()
+                        data_list.append(description) 
+                        print("Adding data to expenses sheet...")
+                        sheet.append_row(data_list)
+                        data_list.clear()
+                        print("Your inputs has been successfully saved in the worksheet.")
+                        print("")
+                        
+                        print("Calculating remaining balance...")
+                        print("")
+                        # Access sum of incomes amount
+                        inc_amount_column = incomes_sheet.col_values(3)
+                        inc_amount_values = inc_amount_column[1:]
+                        sum_of_inc_amount_values = sum(int(value) for value in inc_amount_values)
+                        # Append existing total incomes to the list
+                        total_incomes_total_expenses.append(sum_of_inc_amount_values)
 
-                    # Accessing amount column of the sheet to return sum of all amounts
-                    expenses_amount_column = sheet.col_values(3)
-                    expenses_amount_values = expenses_amount_column[1:]
-                    sum_of_expenses_amount_values = sum(int(value) for value in expenses_amount_values)
-                    # Append total expenses to the list
-                    total_incomes_total_expenses.append(sum_of_expenses_amount_values)
-                    print("Summary sheet updated successfully.")
-                    return total_incomes_total_expenses         
+                        # Accessing amount column of the sheet to return sum of all amounts
+                        expenses_amount_column = sheet.col_values(3)
+                        expenses_amount_values = expenses_amount_column[1:]
+                        sum_of_expenses_amount_values = sum(int(value) for value in expenses_amount_values)
+                        # Append total expenses to the list
+                        total_incomes_total_expenses.append(sum_of_expenses_amount_values)
+                        print("Summary sheet updated successfully.")
+                        return total_incomes_total_expenses         
             else:
                 print("Closing the sheet...\nSheet cloesed.")
                 break
