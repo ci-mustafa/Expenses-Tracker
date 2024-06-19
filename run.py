@@ -100,14 +100,22 @@ def modify_or_display_sheet(sheet: object) -> list:
         if user_choice in ["info", "add", "exit"]:
             if user_choice == "info":
                 data = sheet.get_all_values()
-                print("Presenting the data...")
-                print("")
-                pprint(data)
-                print("")
-                if sheet.title != "Summary":
-                    print("Current data shown. Type 'add' to add more data or 'exit' to close the sheet.")
+
+                # Validate if sheet is empty
+                if not data[1:]:
+                    if sheet.title != "Summary":
+                        print("Sheet is empty!\nType 'add' to add data in this sheet or 'exit' to exit the current sheet.")
+                    else:
+                        print("Sheet is empty!\nType 'exit' to exit the current sheet.")
                 else:
-                    print("Current data shown. Type 'exit' to close the sheet.")
+                    print("Presenting the data...")
+                    print("")
+                    pprint(data)
+                    print("")
+                    if sheet.title != "Summary":
+                        print("Current data shown. Type 'add' to add more data or 'exit' to close the sheet.")
+                    else:
+                        print("Current data shown. Type 'exit' to close the sheet.")
             elif user_choice == "add":
                 if sheet.title == "Summary":
                     print("Heads up: This sheet does not support manual data addition.\n"
