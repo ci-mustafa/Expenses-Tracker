@@ -17,7 +17,7 @@ SHEET = GSPREAD_CLIENT.open('Expenses tracker')
 # Get current date
 CURRENT_DATE = datetime.now().strftime("%Y-%m-%d")
 
-
+# Function to select a sheet
 def select_sheet() -> object:
     """
     This function helps you choose which sheet to access from your Google Spreadsheet.
@@ -67,6 +67,8 @@ def select_sheet() -> object:
 
 
 
+
+#Function to update or display a sheet
 def modify_or_display_sheet(sheet: object) -> list:
     """
     This function allows you to either show the sheet data or add new data to the sheet.
@@ -131,7 +133,7 @@ def modify_or_display_sheet(sheet: object) -> list:
                     data_list.append(CURRENT_DATE)
                     source = input("Enter income source\n>>  ").capitalize() 
                     data_list.append(source)
-                    amount = int(input("Enter income amount\n>>  ")) 
+                    amount = float(input("Enter income amount\n>>  ")) 
                     data_list.append(amount)
                     payment_method = input("Enter income Payment method\n>>  ").capitalize()
                     data_list.append(payment_method)
@@ -148,7 +150,7 @@ def modify_or_display_sheet(sheet: object) -> list:
                     # Accessing amount column of the sheet to return sum of all amounts
                     incomes_amount_column = sheet.col_values(3)
                     incomes_amount_values = incomes_amount_column[1:]
-                    sum_of_incomes_amount_values = sum(int(value) for value in incomes_amount_values)
+                    sum_of_incomes_amount_values = sum(float(value) for value in incomes_amount_values)
                     # Append total incomes to the list
                     total_incomes_total_expenses.append(sum_of_incomes_amount_values)
 
@@ -156,7 +158,7 @@ def modify_or_display_sheet(sheet: object) -> list:
                     expenses_sheet = SHEET.worksheet("Expenses")
                     ex_amount_column = expenses_sheet.col_values(3)
                     ex_amount_values = ex_amount_column[1:]
-                    sum_of_ex_amount_values = sum(int(value) for value in ex_amount_values)
+                    sum_of_ex_amount_values = sum(float(value) for value in ex_amount_values)
                     # Append existing total expenses to the list
                     total_incomes_total_expenses.append(sum_of_ex_amount_values)
                     print("Summary sheet updated successfully.")
@@ -178,7 +180,7 @@ def modify_or_display_sheet(sheet: object) -> list:
                         data_list.append(CURRENT_DATE)
                         expense_type = input("Enter expense type\n>>  ").capitalize() 
                         data_list.append(expense_type)
-                        amount = int(input("Enter expense amount\n>>  ")) 
+                        amount = float(input("Enter expense amount\n>>  ")) 
                         data_list.append(amount)
                         payment_method = input("Enter expense Payment method\n>>  ").capitalize()
                         data_list.append(payment_method)
@@ -195,14 +197,14 @@ def modify_or_display_sheet(sheet: object) -> list:
                         # Access sum of incomes amount
                         inc_amount_column = incomes_sheet.col_values(3)
                         inc_amount_values = inc_amount_column[1:]
-                        sum_of_inc_amount_values = sum(int(value) for value in inc_amount_values)
+                        sum_of_inc_amount_values = sum(float(value) for value in inc_amount_values)
                         # Append existing total incomes to the list
                         total_incomes_total_expenses.append(sum_of_inc_amount_values)
 
                         # Accessing amount column of the sheet to return sum of all amounts
                         expenses_amount_column = sheet.col_values(3)
                         expenses_amount_values = expenses_amount_column[1:]
-                        sum_of_expenses_amount_values = sum(int(value) for value in expenses_amount_values)
+                        sum_of_expenses_amount_values = sum(float(value) for value in expenses_amount_values)
                         # Append total expenses to the list
                         total_incomes_total_expenses.append(sum_of_expenses_amount_values)
                         print("Summary sheet updated successfully.")
