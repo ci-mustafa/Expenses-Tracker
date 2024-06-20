@@ -66,7 +66,16 @@ def select_sheet() -> object:
             print("Wrong Entry!!!")
 
 #Function to validate data entry
-def validate_data_entry(data):
+def validate_data_entry(data) -> bool:
+    """
+    Validates the provided data based on type-specific criteria.
+
+    Parameters:
+        data (str or float): The data to be validated.
+
+    Returns:
+        bool: True if the data meets the validation criteria, False otherwise.
+    """
     if isinstance(data, str):
         if len(data) > 50:
             print("The length of this entry cannot exceed 50 characters.")
