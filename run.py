@@ -65,7 +65,26 @@ def select_sheet() -> object:
         else:
             print("Wrong Entry!!!")
 
-
+#Function to validate data entry
+def validate_data_entry(data):
+    if isinstance(data, str):
+        if len(data) > 50:
+            print("The length of this entry cannot exceed 50 characters.")
+            return False
+        if len(data) < 4:
+            print("The length of this entry cannot be less than 4 characters.")
+            return False
+        if data.isdigit():
+            print("Only digits are not allowed.")
+            return False
+        if data.isspace():
+            print("Only space is not allowed.")
+            return False
+    if isinstance(data, float):
+        if data < 1:
+            print("Please enter a valid amount.")
+            return False
+    return True
 
 
 #Function to update or display a sheet
@@ -131,14 +150,31 @@ def modify_or_display_sheet(sheet: object) -> list:
                     print("")
                     # append current date to data list as the first element of the list
                     data_list.append(CURRENT_DATE)
-                    source = input("Enter income source\n>>  ").capitalize() 
-                    data_list.append(source)
-                    amount = float(input("Enter income amount\n>>  ")) 
-                    data_list.append(amount)
-                    payment_method = input("Enter income Payment method\n>>  ").capitalize()
-                    data_list.append(payment_method)
-                    description = input("write a description for this income\n>>  ").capitalize()
-                    data_list.append(description) 
+                    # Move every inputs inside while loop 
+                    # If data is invalid repeat inputs
+                    while True:
+                        source = input("Enter income source\n>>  ").capitalize() 
+                        if validate_data_entry(source):
+                            data_list.append(source)
+                            break
+                    while True:
+                        try:
+                            amount = float(input("Enter income amount\n>>  ")) 
+                            if validate_data_entry(amount):
+                                data_list.append(amount)
+                                break
+                        except ValueError:
+                            print("Please enter a valid number for the amount.")
+                    while True:
+                        payment_method = input("Enter income Payment method\n>>  ").capitalize()
+                        if validate_data_entry(payment_method):
+                            data_list.append(payment_method)
+                            break
+                    while True:
+                        description = input("write a description for this income\n>>  ").capitalize()
+                        if validate_data_entry(description):
+                            data_list.append(description)
+                            break
                     print("Adding data to incomes sheet...")
                     sheet.append_row(data_list)
                     data_list.clear()
@@ -178,14 +214,31 @@ def modify_or_display_sheet(sheet: object) -> list:
                         print("")
                         # append current date to data list as the first element of the list
                         data_list.append(CURRENT_DATE)
-                        expense_type = input("Enter expense type\n>>  ").capitalize() 
-                        data_list.append(expense_type)
-                        amount = float(input("Enter expense amount\n>>  ")) 
-                        data_list.append(amount)
-                        payment_method = input("Enter expense Payment method\n>>  ").capitalize()
-                        data_list.append(payment_method)
-                        description = input("write a description for this expense\n>>  ").capitalize()
-                        data_list.append(description) 
+                        # Move every inputs inside while loop 
+                        # If data is invalid repeat inputs
+                        while True:
+                            expense_type = input("Enter expense type\n>>  ").capitalize()
+                            if validate_data_entry(expense_type):
+                                data_list.append(expense_type)
+                                break
+                        while True:
+                            try:
+                                amount = float(input("Enter expense amount\n>>  ")) 
+                                if validate_data_entry(amount):
+                                    data_list.append(amount)
+                                    break
+                            except ValueError:
+                                print("Please enter a valid number for the amount.")
+                        while True:
+                            payment_method = input("Enter expense Payment method\n>>  ").capitalize()
+                            if validate_data_entry(payment_method):
+                                data_list.append(payment_method)
+                                break
+                        while True:
+                            description = input("write a description for this expense\n>>  ").capitalize()
+                            if validate_data_entry(description):
+                                data_list.append(description)
+                                break
                         print("Adding data to expenses sheet...")
                         sheet.append_row(data_list)
                         data_list.clear()
