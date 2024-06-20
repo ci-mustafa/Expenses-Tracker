@@ -1,7 +1,6 @@
 import gspread
 from google.oauth2.service_account import Credentials
 from datetime import datetime
-from pprint import pprint
 
 
 SCOPE = [
@@ -140,7 +139,7 @@ def modify_or_display_sheet(sheet: object) -> list:
                 else:
                     print("Presenting the data...")
                     print("")
-                    pprint(data)
+                    print(data)
                     print("")
                     if sheet.title != "Summary":
                         print("Current data shown. Type 'add' to add more data or 'exit' to close the sheet.")
