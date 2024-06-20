@@ -1,6 +1,8 @@
 import gspread
 from google.oauth2.service_account import Credentials
 from datetime import datetime
+import pandas as pd
+from tabulate import tabulate
 
 
 SCOPE = [
@@ -94,6 +96,31 @@ def validate_data_entry(data) -> bool:
             return False
     return True
 
+# Function to display sheets data in nice format
+def display_data(data: list):
+    first_row = data[0]
+    if len(first_row) != 4:
+        df = pd.DataFrame(data=data, columns=[
+                                                first_row[0], 
+                                                first_row[1], 
+                                                first_row[2], 
+                                                first_row[3], 
+                                                first_row[4]
+                                            ]
+                                            )
+    else:
+        df = pd.DataFrame(data=data, columns=[
+                                                first_row[0], 
+                                                first_row[1], 
+                                                first_row[2], 
+                                                first_row[3], 
+                                                
+                                            ]
+                                            )
+    final_data_frame = df[1:]
+    # Convert DataFrame to a formatted table string
+    table = tabulate(final_data_frame, headers='keys', tablefmt='fancy_grid', numalign='center')
+    print(table)
 
 #Function to update or display a sheet
 def modify_or_display_sheet(sheet: object) -> list:
@@ -139,7 +166,7 @@ def modify_or_display_sheet(sheet: object) -> list:
                 else:
                     print("Presenting the data...")
                     print("")
-                    print(data)
+                    display_data(data=data)
                     print("")
                     if sheet.title != "Summary":
                         print("Current data shown. Type 'add' to add more data or 'exit' to close the sheet.")
