@@ -125,7 +125,7 @@ def modify_or_display_sheet(sheet: object) -> list:
     total_incomes_total_expenses = []
 
     while True:
-        user_choice = input(">>  ").lower()
+        user_choice = input("\n>>  ").lower()
         if user_choice in ["info", "add", "exit"]:
             if user_choice == "info":
                 data = sheet.get_all_values()
