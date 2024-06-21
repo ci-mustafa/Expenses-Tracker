@@ -16,3 +16,35 @@ If a selected sheet is empty, users receive a message prompting them to either a
 Additionally, users can interact with the Summary sheet solely by viewing its content or choosing to exit, as attempts to manually add data are met with a clear message indicating that manual entries are not permitted in the Summary sheet.
 
 After performing their desired operations on any sheet, users are given the option to exit the program.
+
+## Features
+
+### Existing Features
+
+- Program instruction:
+    - A clear instruction for users to work with this program.
+
+    ![](/images/instruction-image.png)
+
+- Adding Data to Incomes and Expenses Sheets:
+    - Users can add new income or expense entries to track their financial transactions.
+
+    ![](/images/add-image.png)
+    
+- Viewing Sheet Data:
+    - Users can view their existing incomes, expenses and summaries entries in a neatly formatted table.
+
+    ![](/images/view-image.png)
+
+- Input Validation:
+    - The program validates user inputs to prevent errors and ensure accurate data entry.
+
+    ![](/images/input-validation1.png)
+
+    ![](/images/input-validation2.png)
+
+- Displaying Data in Table Form:
+    - Data in all sheets are presented in a visually appealing table format using the pandas library.
+
+    ![](/images/table-image.png)
+
