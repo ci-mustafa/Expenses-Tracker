@@ -70,3 +70,15 @@ We’re thrilled to announce a new feature that will automatically save a percen
         -   Conducted tests in my local terminal to verify the functionality and performance of the code.
         -   Additionally, tested the project in the Code Institute's Heroku terminal.
 
+## Bugs
+
+### Solved Bugs
+-   Issue: An error occurred when entering a decimal data type for the amount.
+-   Solution: The data type of the 'amount' column was converted to 'float' to accept both floating point numbers and integers, ensuring seamless data entry and processing.
+
+## Remaining Bugs
+-   No bugs remaining
+
+
+
+
