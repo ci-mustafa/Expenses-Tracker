@@ -93,4 +93,9 @@ This project was deployed using Code Institute's Mock terminal for Heroku
     -   Link the Heroku app to the repository
     -   click on Deploy
 
+## Credits
+-   Code Institute: For providing the deployment terminal.
+-   Google Sheets: For offering the service used to store data.
+
+
 
