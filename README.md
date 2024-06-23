@@ -59,3 +59,14 @@ We’re thrilled to announce a new feature that will automatically save a percen
         -   If the remaining balance is between $2000 and $5000, save 10%.
         -   If the remaining balance is less than $2000, save 5%.
 
+## Testing
+-   I have manually tested this project using the following steps:
+    -   PEP8 Compliance:
+        -   Passed the code through a PEP8 linter and corrected any issues to ensure compliance with Python's style guide.
+        -   Confirmed that there are no remaining problems related to code style and formatting.
+    -   Invalid Input Handling:
+        -   Provided various invalid inputs to test the robustness of the input validation, ensuring that the application correctly handles unexpected data types and formats.
+    -   Terminal Testing:
+        -   Conducted tests in my local terminal to verify the functionality and performance of the code.
+        -   Additionally, tested the project in the Code Institute's Heroku terminal.
+
