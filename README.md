@@ -48,3 +48,14 @@ After performing their desired operations on any sheet, users are given the opti
 
     ![](/images/table-image.png)
 
+### Features Left to Implement
+#### Overview
+We’re thrilled to announce a new feature that will automatically save a percentage of your remaining balance based on set conditions. This will streamline your savings process, making sure you can save efficiently according to your financial situation without the hassle of manual adjustments. Plus, we’re updating the summary sheet with a new column to show the percentage saved, giving you a clearer picture of your financial progress.
+-   Predefined Conditional Savings Rules:
+
+    -   The system will include predefined rules that determine the savings percentage based on the remaining balance.
+    -   Example Rule: "If the remaining balance is greater than $5000, save 20%."
+    -   Additional rules can include:
+        -   If the remaining balance is between $2000 and $5000, save 10%.
+        -   If the remaining balance is less than $2000, save 5%.
+
