@@ -83,4 +83,14 @@ We’re thrilled to announce a new feature that will automatically save a percen
 -   PEP8
     -   No errors were returned from pythonchecker.com
 
+## Deployment
+This project was deployed using Code Institute's Mock terminal for Heroku
+-   Steps for deployment
+    -   Fork or clone this repository
+    -   Create a new Heroku app
+    -   Set config vars
+    -   Set the buildbacks to python and nodejs in that order
+    -   Link the Heroku app to the repository
+    -   click on Deploy
+
 
