@@ -79,6 +79,8 @@ We’re thrilled to announce a new feature that will automatically save a percen
 ## Remaining Bugs
 -   No bugs remaining
 
-
+## Validator Testing
+-   PEP8
+    -   No errors were returned from pythonchecker.com
 
 
