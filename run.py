@@ -86,6 +86,9 @@ def validate_data_entry(data) -> bool:
         bool: True if the data meets the validation criteria,
         False otherwise.
     """
+    # constants to store minimum and maximum value of amount column of sheets
+    MIN_AMOUNT = 1
+    MAX_AMOUNT = 100000
     if isinstance(data, str):
         if len(data) > 50:
             print("The length of this entry cannot exceed 50 characters.")
@@ -100,8 +103,13 @@ def validate_data_entry(data) -> bool:
             print("Only space is not allowed.")
             return False
     if isinstance(data, float):
-        if data < 1:
+        if data < MIN_AMOUNT:
             print("Please enter a valid amount.")
+            print("Amount should not be 0 or negative numbers.")
+            return False
+        if data > MIN_AMOUNT:
+            print("Please enter a valid amount.")
+            print("Amount should not be greather than 100000.")
             return False
     return True
 
