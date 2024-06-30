@@ -104,11 +104,9 @@ def validate_data_entry(data) -> bool:
             return False
     if isinstance(data, float):
         if data < MIN_AMOUNT:
-            print("Please enter a valid amount.")
             print("Amount should not be 0 or negative numbers.")
             return False
         if data > MAX_AMOUNT:
-            print("Please enter a valid amount.")
             print("Amount should not be greather than 100000.")
             return False
     return True
