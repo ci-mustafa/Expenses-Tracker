@@ -204,7 +204,7 @@ def modify_or_display_sheet(sheet: object) -> list:
                     print("")
                     if sheet.title != "Summary":
                         print(
-                            "Current data shown. Type 'add' to add more data"
+                            "Current data shown. Type 'add' to add more data "
                             "or 'exit' to close the sheet."
                         )
                     else:
