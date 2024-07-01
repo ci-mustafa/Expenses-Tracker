@@ -4,7 +4,7 @@ Expenses Tracker is a Python terminal program that allows users to save and view
 
 This program runs in the Code Institute mock terminal on Heroku.
 
-[Here is the live verion of this project](https://wallet-watcher-3e97ff5bba22.herokuapp.com/)
+[Here is the live verion of this project]( https://wallet-watcher-ee66c311b54b.herokuapp.com/)
 
 ![](/images/project_image.png)
 
@@ -279,7 +279,7 @@ To deploy with Heroku, Code Institute Python Essentials Template was used so the
 9. Scroll to the top and select "Deploy" tab
 10. Select GitHub as deployment method and search for your repository and link them together
 11. Scroll down and select either "Enable Automatic Deploys" or "Manual Deploy"
-12. Deployed site [Expenses Tracker](https://wallet-watcher-3e97ff5bba22.herokuapp.com/)
+12. Deployed site [Expenses Tracker]( https://wallet-watcher-ee66c311b54b.herokuapp.com/)
 
 ### Forking the GitHub Repository
 
