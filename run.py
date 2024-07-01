@@ -89,6 +89,7 @@ def validate_data_entry(data) -> bool:
     # constants to store minimum and maximum value of amount column of sheets
     MIN_AMOUNT = 1
     MAX_AMOUNT = 100000
+
     if isinstance(data, str):
         if len(data) > 50:
             print("The length of this entry cannot exceed 50 characters.")
@@ -108,7 +109,7 @@ def validate_data_entry(data) -> bool:
             return False
         if data > MAX_AMOUNT:
             print("Amount should not be greather than 100000.")
-            return False
+            return False   
     return True
 
 
@@ -295,7 +296,7 @@ def modify_or_display_sheet(sheet: object) -> list:
                     # Append existing total expenses to the list
                     total_incomes_expenses.append(sum_of_ex_amount_values)
                     print("Summary sheet updated successfully.")
-                    return total_incomes_total_expenses
+                    return total_incomes_expenses
                 elif sheet.title == "Expenses":
                     # Access incomes sheet
                     incomes_sheet = SHEET.worksheet("Incomes")
@@ -384,11 +385,11 @@ def modify_or_display_sheet(sheet: object) -> list:
                             float(value) for value in expenses_amount_values
                         )
                         # Append total expenses to the list
-                        total_incomes_total_expenses.append(
+                        total_incomes_expenses.append(
                             sum_of_expenses_amount_values
                         )
                         print("Summary sheet updated successfully.")
-                        return total_incomes_total_expenses
+                        return total_incomes_expenses
             else:
                 print("Closing the sheet...\nSheet cloesed.")
                 break
