@@ -303,7 +303,7 @@ def modify_or_display_sheet(sheet: object) -> list:
                     # Do not allow expenses sheet to have data entry ability
                     if not incomes_sheet.get_all_values()[1:]:
                         print(
-                            "Sorry, you do not have any incomes to add"
+                            "Sorry, you do not have any incomes to add "
                             "an expense!\nType 'exit' to exit the"
                             "current sheet."
                         )
